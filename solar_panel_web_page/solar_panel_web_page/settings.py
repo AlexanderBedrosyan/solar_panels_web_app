@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'solar_panel_web_page.main_app'
 ]
 
 MIDDLEWARE = [
