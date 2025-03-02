@@ -1,0 +1,31 @@
+.nav-item {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.navbar-nav {
+    text-align: center;
+}
+
+.navbar-nav .nav-item {
+    margin: 0 10px;
+}
+
+.navbar-brand img {
+    height: 40px;
+}
+
+header {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#nav-id:hover {
+    color: #fd7f7f !important;
+}
+
+@media (max-width: 991px) {
+    .navbar-nav {
+        text-align: center;
+        margin-top: 10px;
+    }
+}
