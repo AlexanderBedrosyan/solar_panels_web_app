@@ -2,8 +2,8 @@
 {% load static %}
 
 {% block details %}
-    <title>Home Page</title>
     <link rel="stylesheet" href="{% static 'pages/home-page.css' %}">
+    <title>Home Page</title>
 {% endblock %}
 
 {% block content %}
@@ -14,6 +14,18 @@
             Вашият браузър не поддържа видеа.
         </video>
     </div>
-    <h1 style="z-index: 20">Welcome to the Home Page!</h1>
-    <p>This is the content of the home page.</p>
+
+    <div class="modern-card">
+        <div class="card p-5">
+            <h2 class="card-title text-center mb-4">Добре дошли в нашия свят</h2>
+            <img src="{% static 'images/logo.png' %}" alt="Лого на компанията" class="logo">
+            <p class="card-text text-center">
+                Ние предлагаме иновативни решения в сферата на възобновяемата енергия и соларните технологии, които са насочени към постигането на устойчиво бъдеще. Със специализирани услуги в проектирането, инсталирането и поддръжката на соларни системи, ние помагаме на клиентите си да намалят разходите за енергия и да намалят въглеродния си отпечатък. Нашите решения са не само ефективни и надеждни, но и икономически изгодни, като предоставят дългосрочни ползи за домакинства и бизнеси.
+            </p>
+            <div class="text-center mt-4">
+                <a href="/services" class="btn btn-outline-light btn-lg">Вижте нашите услуги</a>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

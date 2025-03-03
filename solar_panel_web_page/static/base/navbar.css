@@ -3,6 +3,7 @@
     font-weight: bold;
 }
 
+
 .navbar-nav {
     text-align: center;
 }
@@ -15,8 +16,18 @@
     height: 40px;
 }
 
+.nav-link {
+    color: white;
+}
+
+.nav-link {
+    text-shadow: 2px 2px 5px #808080;
+    font-size: 25px;
+}
+
 #nav-id:hover {
-    color: #fd7f7f !important;
+    color: #f8caca !important;
+
 }
 
 .navbar-toggler {

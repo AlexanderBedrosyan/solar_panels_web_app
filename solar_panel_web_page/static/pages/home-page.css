@@ -1,3 +1,11 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Times New Roman", Times, serif;
+}
+
+
 .video-background {
     position: fixed;
     top: 0;
@@ -12,4 +20,57 @@ video {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    filter: brightness(80%);
+}
+
+.modern-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 56px);
+    padding-top: 56px;
+    text-align: center;
+}
+
+.card {
+    background: rgba(0, 0, 0, 0.10) !important;
+    color: white !important;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    padding: 40px;
+    backdrop-filter: blur(2.5px);
+    margin-inline: 200px;
+}
+
+.card-title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: "Open Sans";
+}
+
+.card-text {
+    font-family: "Open Sans";
+    font-size: 22px;
+    letter-spacing: 1px;
+}
+
+.btn-outline-light {
+    font-family: "Open Sans" !important;
+}
+
+.btn-outline-light:hover {
+    background: white;
+    color: black;
+    transition: 0.3s ease-in-out;
+}
+
+.logo {
+    width: 220px;
+    height: auto;
+    margin: 20px auto;
+    display: block;
+    filter: brightness(1.2) contrast(1.3) saturate(1.5);
 }
