@@ -3,6 +3,7 @@ body {
     padding: 0;
     box-sizing: border-box;
     font-family: "Times New Roman", Times, serif;
+    overflow-y: auto;
 }
 
 
@@ -27,10 +28,14 @@ video {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 56px);
-    padding-top: 56px;
+    min-height: 100vh; /* Позволява на картата да расте, ако е необходимо */
+    padding-top: 100px; /* Разстояние отгоре */
+    padding-bottom: 100px; /* Разстояние отдолу */
     text-align: center;
+    z-index: 1;
+    box-sizing: border-box; /* Включва padding в изчисленията на височината */
 }
+
 
 .card {
     background: rgba(0, 0, 0, 0.10) !important;
@@ -42,6 +47,7 @@ video {
     backdrop-filter: blur(2.5px);
     margin-inline: 200px;
 }
+
 
 .card-title {
     font-size: 2rem;
