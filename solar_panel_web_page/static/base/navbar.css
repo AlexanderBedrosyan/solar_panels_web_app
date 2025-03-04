@@ -41,3 +41,9 @@
 .bg-light {
     background-color: transparent !important;
 }
+
+.navbar-scroll {
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    transition: background-color 0.5s ease-in-out;
+    backdrop-filter: blur(5px);
+}
