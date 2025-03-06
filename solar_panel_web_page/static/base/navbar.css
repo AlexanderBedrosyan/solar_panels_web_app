@@ -1,15 +1,24 @@
 .nav-item {
     font-size: 1.2rem;
     font-weight: bold;
+    display: inline-block !important;
 }
 
 
 .navbar-nav {
     text-align: center;
+
+    display: inline-block;
+    gap: 30px;
+    justify-content: center;
+    width: 100%;
+    padding: 10px 0;
+    list-style: none;
 }
 
 .navbar-nav .nav-item {
     margin: 0 10px;
+    display: inline-block !important;
 }
 
 .navbar-brand img {
