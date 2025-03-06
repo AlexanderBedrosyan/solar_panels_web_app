@@ -28,12 +28,12 @@ video {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; /* Позволява на картата да расте, ако е необходимо */
-    padding-top: 100px; /* Разстояние отгоре */
-    padding-bottom: 100px; /* Разстояние отдолу */
+    min-height: 100vh;
+    padding-top: 100px;
+    padding-bottom: 100px;
     text-align: center;
     z-index: 1;
-    box-sizing: border-box; /* Включва padding в изчисленията на височината */
+    box-sizing: border-box;
 }
 
 
@@ -109,3 +109,20 @@ video {
     color: black;
     transform: scale(1.1);
 }
+
+
+@media only screen and (max-width: 780px) {
+    .modern-card .card {
+        margin-inline: 50px !important;
+    }
+}
+
+@media only screen and (max-width: 490px) {
+    html body .modern-card .card {
+        margin-inline: 50px !important;
+        margin-top: -350px !important;
+    }
+}
+
+
+
