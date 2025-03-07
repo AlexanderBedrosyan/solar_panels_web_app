@@ -45,7 +45,6 @@ video {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
     padding: 40px;
     backdrop-filter: blur(2.5px);
-    margin-inline: 200px;
 }
 
 
@@ -110,19 +109,10 @@ video {
     transform: scale(1.1);
 }
 
-
-@media only screen and (max-width: 780px) {
-    .modern-card .card {
-        margin-inline: 50px !important;
-    }
-}
-
-@media only screen and (max-width: 490px) {
-    html body .modern-card .card {
-        margin-inline: 50px !important;
-        margin-top: -350px !important;
-    }
-}
-
+/*@media (max-width: 800px) {*/
+/*    .modern-card {*/
+/*        display: none;*/
+/*    }*/
+/*}*/
 
 
