@@ -10,3 +10,7 @@ class HomePage(TemplateView):
 class AboutUs(TemplateView):
     template_name = 'common/about-us.html'
 
+
+class Services(TemplateView):
+    template_name = 'common/services.html'
+
