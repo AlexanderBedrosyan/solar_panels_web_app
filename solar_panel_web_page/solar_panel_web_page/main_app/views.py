@@ -14,3 +14,11 @@ class AboutUs(TemplateView):
 class Services(TemplateView):
     template_name = 'common/services.html'
 
+
+class Projects(TemplateView):
+    template_name = 'common/projects.html'
+
+
+class Contacts(TemplateView):
+    template_name = 'common/contacts.html'
+
