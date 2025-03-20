@@ -7,23 +7,6 @@ body {
 }
 
 
-/*.video-background {*/
-/*    position: fixed;*/
-/*    top: 0;*/
-/*    left: 0;*/
-/*    width: 100%;*/
-/*    height: 100%;*/
-/*    z-index: -1;*/
-/*    overflow: hidden;*/
-/*}*/
-
-/*video {*/
-/*    width: 100%;*/
-/*    height: 100%;*/
-/*    object-fit: cover;*/
-/*    filter: brightness(80%);*/
-/*}*/
-
 .modern-card {
     display: flex;
     justify-content: center;
@@ -108,11 +91,5 @@ body {
     color: black;
     transform: scale(1.1);
 }
-
-/*@media (max-width: 800px) {*/
-/*    .modern-card {*/
-/*        display: none;*/
-/*    }*/
-/*}*/
 
 
