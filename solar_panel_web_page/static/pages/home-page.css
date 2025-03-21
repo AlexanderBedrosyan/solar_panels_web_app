@@ -30,6 +30,11 @@ body {
     backdrop-filter: blur(2.5px);
 }
 
+body > div.dark-section.text-white.py-4 {
+    background: rgba(0, 0, 0, 0.10) !important;
+    backdrop-filter: blur(2.5px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+}
 
 .card-title {
     font-size: 2rem;
