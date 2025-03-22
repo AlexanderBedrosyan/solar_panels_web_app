@@ -1,0 +1,19 @@
+body {
+    font-family: "Open Sans" !important;
+}
+
+body > section > div > div > div {
+    background: rgba(0, 0, 0, 0.10) !important;
+    backdrop-filter: blur(2.5px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8) !important;
+}
+
+.card-footer:last-child {
+    border-color: grey !important;
+}
+
+body > div.dark-section.text-white.py-4 {
+    background: rgba(0, 0, 0, 0.10) !important;
+    backdrop-filter: blur(2.5px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+}
