@@ -8,34 +8,23 @@
 
 
 {% block content %}
-    <section class="container my-5">
-        <div class="row" style="margin-top: 100px">
-            <div class="col-md-8 mx-auto">
-                <div class="card shadow-lg border-0" style="box-shadow: 0 0 20px rgba(0, 0, 0, 0.8) !important;">
-                    <div class="card-body">
-                        <img src="{% static 'images/logo.png' %}" alt="Лого на компанията" class="logo" style="margin-top: -30px;">
-                        <hr>
-                        <p><i class="fas fa-phone"></i> <strong>Телефон: </strong>0889192688</p>
-                        <p><i class="fas fa-envelope"></i> <strong>Email: </strong>test@abv.bg</p>
-                        <p><i class="fab fa-facebook"></i> <strong>Facebook:</strong>
-                            <a href="https://www.facebook.com/share/1BVx3PG7UJ/?mibextid=wwXIfr" target="_blank">SolarTronix
-                                FB</a>
-                        </p>
-                        <p><i class="fab fa-instagram"></i> <strong>Instagram:</strong>
-                            <a href="https://www.instagram.com/solartronix?igsh=MXVrcmVjb2VobmcxMQ==" target="_blank">SolarTronix
-                                IG</a>
-                        </p>
-                    </div>
-                    <div class="card-footer text-center" style="border-color: grey !important;">
-                        <a href="{% url 'home-page' %}" class="btn btn-secondary btn-sm">
-                            <i class="fas fa-arrow-left"></i> Начало
-                        </a>
-                    </div>
-                </div>
-            </div>
+    <div class="modern-card">
+        <div class="card mt-0 mt-sm-1 mx-auto mt-md-5" style="max-width: 90%;">
+            <img src="{% static 'images/logo.png' %}" alt="Лого на компанията" class="logo" style="margin-top: -30px;">
+            <hr>
+            <p><i class="fas fa-phone"></i> <strong>Телефон: </strong>0889192688</p>
+            <p><i class="fas fa-envelope"></i> <strong>Email: </strong>test@abv.bg</p>
+            <p><i class="fab fa-facebook"></i> <strong>Facebook:</strong>
+                <a href="https://www.facebook.com/share/1BVx3PG7UJ/?mibextid=wwXIfr" target="_blank">SolarTronix
+                    FB</a>
+            </p>
+            <p><i class="fab fa-instagram"></i> <strong>Instagram:</strong>
+                <a href="https://www.instagram.com/solartronix?igsh=MXVrcmVjb2VobmcxMQ==" target="_blank">SolarTronix
+                    IG</a>
+            </p>
         </div>
-    </section>
-    
+    </div>
+
     {% include 'common/bottom-view.html' %}
 
 {% endblock %}
