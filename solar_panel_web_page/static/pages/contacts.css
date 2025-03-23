@@ -1,19 +1,69 @@
 body {
-    font-family: "Open Sans" !important;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Times New Roman", Times, serif;
+    overflow-y: auto;
 }
 
-body > section > div > div > div {
+
+.modern-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    text-align: center;
+    z-index: 1;
+    box-sizing: border-box;
+}
+
+
+.card {
     background: rgba(0, 0, 0, 0.10) !important;
+    color: white !important;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    padding: 40px;
     backdrop-filter: blur(2.5px);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8) !important;
-}
-
-.card-footer:last-child {
-    border-color: grey !important;
 }
 
 body > div.dark-section.text-white.py-4 {
     background: rgba(0, 0, 0, 0.10) !important;
     backdrop-filter: blur(2.5px);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+.card-title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: "Open Sans";
+}
+
+.card-text {
+    font-family: "Open Sans";
+    font-size: 22px;
+    letter-spacing: 1px;
+}
+
+.btn-outline-light {
+    font-family: "Open Sans" !important;
+}
+
+.btn-outline-light:hover {
+    background: white;
+    color: black;
+    transition: 0.3s ease-in-out;
+}
+
+.logo {
+    width: 220px;
+    height: auto;
+    margin: 20px auto;
+    display: block;
+    filter: brightness(1.2) contrast(1.3) saturate(1.5);
 }
