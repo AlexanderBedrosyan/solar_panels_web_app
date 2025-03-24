@@ -22,3 +22,7 @@ class Projects(TemplateView):
 class Contacts(TemplateView):
     template_name = 'common/contacts.html'
 
+
+class PrivacyPolicy(TemplateView):
+    template_name = 'others/privacy-policy.html'
+
