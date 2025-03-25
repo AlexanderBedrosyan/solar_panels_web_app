@@ -26,3 +26,7 @@ class Contacts(TemplateView):
 class PrivacyPolicy(TemplateView):
     template_name = 'others/privacy-policy.html'
 
+
+class TermsOfUse(TemplateView):
+    template_name = 'others/terms_of_use.html'
+
