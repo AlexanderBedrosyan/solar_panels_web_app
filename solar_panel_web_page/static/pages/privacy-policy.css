@@ -25,6 +25,7 @@ body {
     color: whitesmoke;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(2.5px);
+    border-radius: 7px;
 }
 
 .dark-section {
