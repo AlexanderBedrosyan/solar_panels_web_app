@@ -1,3 +1,7 @@
 from django.contrib import admin
+from .models import Consultation
 
-# Register your models here.
+
+@admin.register(Consultation)
+class ConsultationAdmin(admin.ModelAdmin):
+    pass
