@@ -2,34 +2,32 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Times New Roman", Times, serif;
-    overflow-y: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     min-height: 100vh;
 }
 
-.text-holder {
-    display: flex;
-    flex-direction: column;
-}
-
-.text-holder {
-    align-self: center;
-    margin-block: 150px;
-    background: rgba(0, 0, 0, 0.10) !important;
-    backdrop-filter: blur(2.5px);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
-    color: whitesmoke;
-    padding: 20px;
-    border-radius: 7px;
-    max-width: 90%;
-    width: 90%;
-}
-
 .dark-section {
     background: rgba(0, 0, 0, 0.10) !important;
     backdrop-filter: blur(2.5px);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+.text-holder {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+}
+
+.text-holder {
+    background: rgba(0, 0, 0, 0.10) !important;
+    backdrop-filter: blur(2.5px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    margin-block: 150px;
+    padding: 15px;
+    color: whitesmoke;
+    max-width: 90%;
+    width: 90%;
+    border-radius: 7px;
 }
