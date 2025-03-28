@@ -49,6 +49,10 @@ body > div.dark-section.text-white.py-4 {
     letter-spacing: 1px;
 }
 
+body > div.modern-card > div > p {
+    text-align: start !important;
+}
+
 .btn-outline-light {
     font-family: "Open Sans" !important;
 }
