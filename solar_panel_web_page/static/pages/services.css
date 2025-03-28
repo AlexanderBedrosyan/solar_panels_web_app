@@ -1,0 +1,42 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center;
+    overflow-y: auto;
+    font-family: "Times New Roman", Times, serif;
+}
+
+.text-holder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.text-holder {
+    margin-top: 140px;
+    background: rgba(0, 0, 0, 0.10) !important;
+    backdrop-filter: blur(2.5px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    margin-inline: 5%;
+    color: whitesmoke;
+    font-family: "Open Sans";
+    letter-spacing: 1px;
+    border-radius: 7px;
+    padding: 40px;
+    font-size: 22px;
+}
+
+.text-holder > h1 {
+    margin-bottom: 30px;
+}
+
+@media (max-width: 700px) {
+    .text-holder {
+        margin-top: 100px !important;
+    }
+}
+
