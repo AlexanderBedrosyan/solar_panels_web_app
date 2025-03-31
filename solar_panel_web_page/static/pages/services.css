@@ -18,7 +18,7 @@ body {
 
 .text-holder {
     margin-top: 140px;
-    background: rgba(0, 0, 0, 0.10) !important;
+    background: rgba(0, 0, 0, 0.14) !important;
     backdrop-filter: blur(2.5px);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
     margin-inline: 5%;
@@ -32,6 +32,14 @@ body {
 
 .text-holder > h1 {
     margin-bottom: 30px;
+}
+
+body > div.dark-section.text-white.py-4 {
+    margin-top: 140px;
+    background: rgba(0, 0, 0, 0.14) !important;
+    backdrop-filter: blur(2.5px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    width: 100%;
 }
 
 @media (max-width: 700px) {
