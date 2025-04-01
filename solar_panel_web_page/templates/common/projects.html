@@ -2,11 +2,11 @@
 {% load static %}
 
 {% block details %}
-    <link rel="stylesheet" href="/">
+    <link rel="stylesheet" href="{% static 'pages/projects.css' %}">
     <title>Projects</title>
 {% endblock %}
 
 {% block content %}
 
-    
+    {% include 'common/bottom-view.html' %}
 {% endblock %}
