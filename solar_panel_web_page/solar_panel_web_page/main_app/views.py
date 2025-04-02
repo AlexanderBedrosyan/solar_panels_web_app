@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, CreateView
+from django.views.generic import TemplateView, CreateView, ListView
 
 from solar_panel_web_page.main_app.forms import ConsultationCreateForm
-from solar_panel_web_page.main_app.models import Consultation
+from solar_panel_web_page.main_app.models import Consultation, Project
 
 
 # Create your views here.
@@ -19,8 +19,11 @@ class Services(TemplateView):
     template_name = 'common/services.html'
 
 
-class Projects(TemplateView):
+class Projects(ListView):
+    model = Project
     template_name = 'common/projects.html'
+    context_object_name = 'object_list'
+    paginate_by = 3
 
 
 class Contacts(CreateView):
