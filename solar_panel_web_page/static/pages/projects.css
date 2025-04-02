@@ -15,3 +15,15 @@ body > div.dark-section.text-white.py-4 {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
     width: 100%;
 }
+
+#content-card {
+    background: rgba(0, 0, 0, 0.14) !important;
+    backdrop-filter: blur(2.5px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    color: white;
+    font-family: "Open Sans" !important;
+}
+
+#main-card {
+   font-family: "Open Sans" !important;
+}
