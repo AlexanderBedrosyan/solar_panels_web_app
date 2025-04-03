@@ -25,5 +25,16 @@ body > div.dark-section.text-white.py-4 {
 }
 
 #main-card {
-   font-family: "Open Sans" !important;
+    font-family: "Open Sans" !important;
+}
+
+.page-link {
+    background: rgba(0, 0, 0, 0.14) !important;
+    backdrop-filter: blur(2.5px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    color: whitesmoke !important;
+}
+
+body > div.container.my-5 > div.pagination-container.text-center.mt-4 > nav > ul > li.page-item.active > .page-link {
+    border-color: grey;
 }
