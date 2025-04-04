@@ -3,7 +3,12 @@ body {
     padding: 0;
     box-sizing: border-box;
     font-family: "Times New Roman", Times, serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center;
     overflow-y: auto;
+    justify-content: space-between;
 }
 
 
@@ -72,4 +77,12 @@ body > div.dark-section.text-white.py-4 {
     background: rgba(0, 0, 0, 0.10) !important;
     backdrop-filter: blur(2.5px);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+body > div.dark-section.text-white.py-4 {
+    margin-top: 140px;
+    background: rgba(0, 0, 0, 0.14) !important;
+    backdrop-filter: blur(2.5px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    width: 100%;
 }
