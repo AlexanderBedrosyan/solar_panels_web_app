@@ -1,0 +1,43 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: auto;
+    min-height: 100vh;
+}
+
+body > div.dark-section.text-white.py-4 {
+    background: rgba(0, 0, 0, 0.14) !important;
+    backdrop-filter: blur(2.5px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    width: 100%;
+}
+
+#content-card {
+    background: rgba(0, 0, 0, 0.14) !important;
+    backdrop-filter: blur(2.5px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    padding-block: 20px;
+    margin-top: 100px !important;
+    color: whitesmoke;
+    font-family: "Open Sans" !important;
+    padding-inline: 8px !important;
+    text-align: center;
+    width: 650px;
+    max-width: 90%;
+    border-radius: 20px;
+}
+
+#content-card > div > img {
+    width: 250px;
+    border: solid 0.1em;
+    border-color: #796e6e;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    margin-block: 12px;
+}
