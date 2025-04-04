@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, CreateView, ListView
+from django.views.generic import TemplateView, CreateView, ListView, DetailView
 
 from solar_panel_web_page.main_app.forms import ConsultationCreateForm
 from solar_panel_web_page.main_app.models import Consultation, Project
@@ -43,4 +43,11 @@ class TermsOfUse(TemplateView):
 
 class CookiePolicy(TemplateView):
     template_name = 'others/cookie-policy.html'
+
+
+class ProjectDetailView(DetailView):
+    model = Project
+    template_name = 'common/project_detail.html'
+    context_object_name = 'project'
+    pk_url_kwarg = 'id'
 
