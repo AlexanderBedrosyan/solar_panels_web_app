@@ -29,7 +29,7 @@
                     {% csrf_token %}
                     {{ form.as_p }}
                     <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-secondary">Изпрати Заявката</button>
+                        <button type="submit" class="btn btn-secondary" onclick="isBot(event)">Изпрати Заявката</button>
                     </div>
                 </form>
             </div>
@@ -41,7 +41,17 @@
         </div>
     </div>
 
+    <div id="captchaModal" class="modal" style="display: none;">
+        <div class="modal-content text-center p-4 rounded"
+             style="max-width: 400px; margin: 100px auto; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.3);">
+            <h5>Проверка за човек</h5>
+            <p id="captchaPrompt" class="mb-2"></p>
+            <input type="text" id="captchaInput" class="form-control mb-3" placeholder="Въведи кода тук">
+            <button class="btn btn-primary" onclick="submitCaptcha()">Потвърди</button>
+        </div>
+    </div>
 
     {% include 'common/bottom-view.html' %}
 
+    <script src="{% static 'javascript/bot-checker.js' %}"></script>
 {% endblock %}
