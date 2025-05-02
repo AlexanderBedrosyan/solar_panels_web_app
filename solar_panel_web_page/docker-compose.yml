@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  django:
+    build:
+      context: .  # Това ще указва на Docker да използва текущата директория за изграждане
+      dockerfile: Dockerfile  # Използвай Dockerfile, за да изградим приложението
+    container_name: django_app
+    ports:
+      - "8000:8000"  # Мапирай порта 8000 на хост машината към порта 8000 в контейнера
+    volumes:
+      - .:/app  # Мапирай локалната директория към контейнера за лесно обновяване
+    environment:
+      - DEBUG=1  # Това е просто за тестови цели, можеш да промениш за production
+    networks:
+      - app-net
+
+networks:
+  app-net:
+    driver: bridge
