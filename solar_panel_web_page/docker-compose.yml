@@ -2,18 +2,24 @@ version: "3.9"
 services:
   django:
     build:
-      context: .  # Това ще указва на Docker да използва текущата директория за изграждане
-      dockerfile: Dockerfile  # Използвай Dockerfile, за да изградим приложението
+      context: .
+      dockerfile: Dockerfile
     container_name: django_app
     ports:
-      - "8000:8000"  # Мапирай порта 8000 на хост машината към порта 8000 в контейнера
+      - "8000:8000"
     volumes:
-      - .:/app  # Мапирай локалната директория към контейнера за лесно обновяване
+      - .:/app
     environment:
-      - DEBUG=1  # Това е просто за тестови цели, можеш да промениш за production
+      - DEBUG=1
     networks:
-      - app-net
+      - dokploy_dokploy-net
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=dokploy_dokploy-net
+      - traefik.http.routers.solartronix.rule=Host(`solartronix-solartronix-1hw9iq-b44d96-164-68-123-12.traefik.me`)
+      - traefik.http.routers.solartronix.entrypoints=web
+      - traefik.http.services.solartronix.loadbalancer.server.port=8000
 
 networks:
-  app-net:
-    driver: bridge
+  dokploy_dokploy-net:
+    external: true
