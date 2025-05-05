@@ -11,15 +11,3 @@ services:
       - .:/app
     environment:
       - DEBUG=1
-    networks:
-      - dokploy_dokploy-net
-    labels:
-      - traefik.enable=true
-      - traefik.docker.network=dokploy_dokploy-net
-      - traefik.http.routers.solartronix.rule=Host(`solartronix-solartronix-1hw9iq-b44d96-164-68-123-12.traefik.me`)
-      - traefik.http.routers.solartronix.entrypoints=web
-      - traefik.http.services.solartronix.loadbalancer.server.port=8000
-
-networks:
-  dokploy_dokploy-net:
-    external: true
