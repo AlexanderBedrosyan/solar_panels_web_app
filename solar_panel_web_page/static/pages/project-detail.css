@@ -41,3 +41,10 @@ body > div.dark-section.text-white.py-4 {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
     margin-block: 12px;
 }
+
+#content-card > div > p {
+    text-align: left !important;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
