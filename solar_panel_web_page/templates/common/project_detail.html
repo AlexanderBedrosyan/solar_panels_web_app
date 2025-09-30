@@ -13,10 +13,45 @@
         <div>
             <h1 class="display-4">{{ project.title }}</h1>
             <img src="{{ project.image_url }}" alt="project-img">
+            {% if project.secondary_image_url %}
+                <img src="{{ project.secondary_image_url }}" alt="project-img">
+            {% endif %}
             <p>{{ project.description|linebreaksbr }}</p>
             <a href="{% url 'projects' %}" class="btn btn-secondary">Назад към проектите</a>
         </div>
 </div>
+    
+<div id="lightbox-overlay">
+    <span id="lightbox-close">&times;</span>
+    <img id="lightbox-image" src="" alt="expanded-img">
+</div>
+
 
     {% include 'common/bottom-view.html' %}
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const overlay = document.getElementById("lightbox-overlay");
+    const overlayImg = document.getElementById("lightbox-image");
+    const closeBtn = document.getElementById("lightbox-close");
+
+    document.querySelectorAll("#content-card img").forEach(img => {
+        img.style.cursor = "pointer";
+        img.addEventListener("click", () => {
+            overlayImg.src = img.src;
+            overlay.classList.add("active");
+        });
+    });
+
+    closeBtn.addEventListener("click", () => {
+        overlay.classList.remove("active");
+    });
+
+    overlay.addEventListener("click", (e) => {
+        if (e.target === overlay) {
+            overlay.classList.remove("active");
+        }
+    });
+});
+</script>
+
 {% endblock %}
