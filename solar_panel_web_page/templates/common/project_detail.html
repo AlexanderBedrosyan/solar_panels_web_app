@@ -17,6 +17,10 @@
                 <img src="{{ project.secondary_image_url }}" alt="project-img">
             {% endif %}
             <p>{{ project.description|linebreaksbr }}</p>
+            {% if project.post_url %}
+                <div><a href="{{ project.post_url }}" class="text-holder">Повече информация за проекта</a></div>
+                <br>
+            {% endif %}
             <a href="{% url 'projects' %}" class="btn btn-secondary">Назад към проектите</a>
         </div>
 </div>

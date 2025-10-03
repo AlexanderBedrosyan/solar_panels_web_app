@@ -46,6 +46,12 @@ class Project(models.Model):
         blank=True,
         null=True
     )
+    post_url = models.URLField(
+        max_length=500,
+        verbose_name="Път към поста в социалните мрежи",
+        blank=True,
+        null=True
+    )
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата на създаване")
 
     def __str__(self):
