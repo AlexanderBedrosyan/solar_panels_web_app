@@ -48,7 +48,7 @@ class Contacts(CreateView):
         consultation = form.instance
 
         user = os.getenv("MAIL_NAME")
-        password = os.getenv("PASSWORD")
+        password = os.getenv("MAIL_PASSWORD")
         recipient = os.getenv("RECEPIENT")
 
         msg = EmailMessage()
