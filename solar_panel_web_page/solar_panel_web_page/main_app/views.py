@@ -51,6 +51,10 @@ class Contacts(CreateView):
         password = os.getenv("MAIL_PASSWORD")
         recipient = os.getenv("RECEPIENT")
 
+        print(user)
+        print(password)
+        print(recipient)
+
         msg = EmailMessage()
         msg["From"] = user
         msg["To"] = recipient
