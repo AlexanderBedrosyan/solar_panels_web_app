@@ -9,6 +9,8 @@ from solar_panel_web_page.main_app.models import Consultation, Project
 from pathlib import Path
 from dotenv import load_dotenv
 import os
+import requests
+from django.core.exceptions import ImproperlyConfigured
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -43,47 +45,41 @@ class Contacts(CreateView):
     success_url = reverse_lazy('home-page')
 
     def form_valid(self, form):
-        """Изпраща email след като формата е успешно попълнена."""
+        """Изпраща известие чрез Formspree след успешно попълване."""
         response = super().form_valid(form)
         consultation = form.instance
 
-        user = os.getenv("MAIL_NAME")
-        password = os.getenv("MAIL_PASSWORD")
-        recipient = os.getenv("RECEPIENT")
+        # 🔹 Formspree endpoint
+        formspree_url = os.getenv("FORMSPREE_URL")
+        if not formspree_url:
+            raise ImproperlyConfigured("Не е зададен FORMSPREE_URL в .env файла!")
 
-        print(user)
-        print(password)
-        print(recipient)
+        # 🔹 Подготвяме съобщението (по-сбит вид)
+        message = (
+            f"📩 Нова заявка за консултация!\n\n"
+            f"👤 {consultation.first_name} {consultation.last_name}\n"
+            f"📧 {consultation.email}\n"
+            f"📞 {consultation.phone_number}\n"
+            f"🗓️ {consultation.consultation_datetime.strftime('%d.%m.%Y %H:%M')}\n\n"
+            f"📝 {consultation.description[:250]}..."  # ако описанието е дълго
+        )
 
-        msg = EmailMessage()
-        msg["From"] = user
-        msg["To"] = recipient
-        msg["Subject"] = "🧾 Нова заявка за консултация от сайта"
-
-        msg.set_content(f"""
-    Здравей, имаш нова заявка за консултация:
-
-    👤 Име: {consultation.first_name} {consultation.last_name}
-    📧 Имейл: {consultation.email}
-    📞 Телефон: {consultation.phone_number}
-    📅 Дата и час: {consultation.consultation_datetime}
-
-    📝 Описание:
-    {consultation.description}
-
-    --- 
-    Това съобщение е изпратено автоматично от формата на сайта.
-            """)
+        # 🔹 Данните, които ще се изпратят към Formspree
+        data = {
+            "name": f"{consultation.first_name} {consultation.last_name}",
+            "email": consultation.email,
+            "message": message,
+        }
 
         try:
-            with smtplib.SMTP_SSL("smtp.abv.bg", 465, timeout=20) as server:
-                server.login(user, password)
-                server.send_message(msg)
-            print("✅ Имейлът е изпратен успешно!")
-        except smtplib.SMTPAuthenticationError as e:
-            print("❌ SMTP грешка при логин:", e)
-        except Exception as e:
-            print("❌ Грешка при изпращане:", type(e).__name__, e)
+            r = requests.post(formspree_url, data=data, timeout=10)
+            if r.status_code == 200:
+                print("✅ Имейлът е изпратен успешно чрез Formspree!")
+            else:
+                print(f"⚠️ Formspree върна статус {r.status_code}: {r.text}")
+
+        except requests.exceptions.RequestException as e:
+            print("❌ Грешка при изпращане към Formspree:", e)
 
         return response
 
