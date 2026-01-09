@@ -13,9 +13,13 @@ services:
       # Persist static files (optional but recommended)
       - static_volume:/app/static
     environment:
-      - DEBUG=True
-      - SECRET_KEY=your-secret-key-here-change-in-dokploy
+      - DEBUG=${DEBUG:-False}
+      - SECRET_KEY=${SECRET_KEY}
       - DB_PATH=/app/db_data/db.sqlite3
+      # Superuser credentials
+      - DJANGO_SUPERUSER_USERNAME=${DJANGO_SUPERUSER_USERNAME:-admin}
+      - DJANGO_SUPERUSER_EMAIL=${DJANGO_SUPERUSER_EMAIL}
+      - DJANGO_SUPERUSER_PASSWORD=${DJANGO_SUPERUSER_PASSWORD}
 
 volumes:
   db_data:
