@@ -7,7 +7,15 @@ services:
     container_name: django_app
     ports:
       - "8000:8000"
-#    volumes:
-#      - .:/app
+    volumes:
+      # Persist the database file across container restarts/rebuilds
+      - db_data:/app/db_data
+      # Persist static files (optional but recommended)
+      - static_volume:/app/static
     environment:
       - DEBUG=1
+      - DB_PATH=/app/db_data/db.sqlite3
+
+volumes:
+  db_data:
+  static_volume:

@@ -79,10 +79,15 @@ WSGI_APPLICATION = 'solar_panel_web_page.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# Use environment variable to determine database location
+# In Docker, use /app/db_data/db.sqlite3 (persistent volume)
+# Locally, use BASE_DIR / 'db.sqlite3' (project directory)
+DB_PATH = os.getenv('DB_PATH', str(BASE_DIR / 'db.sqlite3'))
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': DB_PATH,
     }
 }
 
