@@ -36,6 +36,7 @@ class Projects(ListView):
     template_name = 'common/projects.html'
     context_object_name = 'object_list'
     paginate_by = 3
+    ordering = ['-created_at']  # Most recent projects first
 
 
 class Contacts(CreateView):
