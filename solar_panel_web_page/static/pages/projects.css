@@ -39,12 +39,4 @@ body > div.container.my-5 > div.pagination-container.text-center.mt-4 > nav > ul
     border-color: grey;
 }
 
-.lazy-img {
-    filter: blur(10px);
-    transition: filter 0.4s ease;
-}
-
-.lazy-img.loaded {
-    filter: blur(0);
-}
 

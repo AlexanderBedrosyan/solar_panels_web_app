@@ -16,7 +16,7 @@
             {% for project in object_list %}
             <div class="col-md-4 mb-4">
                 <div class="card shadow-sm" id="content-card" style="box-shadow: 0 0 20px rgba(0, 0, 0, 0.8) !important;">
-                    <img src="{{ project.image_url }}" alt="{{ project.title }}" class="card-img-top lazy-img" loading="lazy" decoding="async" style="height: 200px; object-fit: cover;">
+                    <img src="{{ project.image_url }}" alt="{{ project.title }}" class="card-img-top" style="height: 200px; object-fit: cover;">
                     <div class="card-body">
                         <h5 class="card-title">{{ project.title }}</h5>
                         <p class="card-text">{{ project.description|truncatewords:4 }}</p>
@@ -52,19 +52,6 @@
         </nav>
     </div>
 </div>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll("img.lazy-img").forEach(img => {
-    if (img.complete) {
-      img.classList.add("loaded");
-    } else {
-      img.addEventListener("load", () => img.classList.add("loaded"));
-    }
-  });
-});
-</script>
-
 
     {% include 'common/bottom-view.html' %}
 {% endblock %}
