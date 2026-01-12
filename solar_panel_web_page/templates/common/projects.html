@@ -69,56 +69,69 @@
     {% include 'common/bottom-view.html' %}
 
     <script>
-        // Loading screen logic
-        document.addEventListener('DOMContentLoaded', function() {
+        // Loading screen logic - runs immediately
+        (function() {
             const loadingScreen = document.getElementById('loading-screen');
-            const images = document.querySelectorAll('.card-img-top');
-            let loadedImages = 0;
-            const totalImages = images.length;
-
+            
             // Function to hide loading screen
             function hideLoader() {
-                loadingScreen.style.opacity = '0';
-                setTimeout(() => {
-                    loadingScreen.style.display = 'none';
-                }, 500);
-            }
-
-            // If no images, hide loader immediately
-            if (totalImages === 0) {
-                hideLoader();
-                return;
-            }
-
-            // Track image loading
-            images.forEach(img => {
-                if (img.complete) {
-                    loadedImages++;
-                } else {
-                    img.addEventListener('load', () => {
-                        loadedImages++;
-                        if (loadedImages === totalImages) {
-                            hideLoader();
-                        }
-                    });
-                    img.addEventListener('error', () => {
-                        loadedImages++;
-                        if (loadedImages === totalImages) {
-                            hideLoader();
-                        }
-                    });
+                if (loadingScreen) {
+                    loadingScreen.style.opacity = '0';
+                    setTimeout(() => {
+                        loadingScreen.style.display = 'none';
+                    }, 500);
                 }
-            });
-
-            // If all images already loaded
-            if (loadedImages === totalImages) {
-                hideLoader();
             }
 
-            // Fallback: hide after 3 seconds maximum
+            // Function to check all images
+            function checkImages() {
+                const images = document.querySelectorAll('.card-img-top');
+                const totalImages = images.length;
+                
+                if (totalImages === 0) {
+                    hideLoader();
+                    return;
+                }
+
+                let loadedImages = 0;
+
+                // Track image loading
+                images.forEach(img => {
+                    if (img.complete && img.naturalHeight !== 0) {
+                        loadedImages++;
+                    } else {
+                        img.addEventListener('load', () => {
+                            loadedImages++;
+                            if (loadedImages === totalImages) {
+                                hideLoader();
+                            }
+                        });
+                        img.addEventListener('error', () => {
+                            loadedImages++;
+                            if (loadedImages === totalImages) {
+                                hideLoader();
+                            }
+                        });
+                    }
+                });
+
+                // If all images already loaded
+                if (loadedImages === totalImages) {
+                    hideLoader();
+                }
+            }
+
+            // Run when DOM is ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', checkImages);
+            } else {
+                checkImages();
+            }
+
+            // Fallback: hide after 5 seconds maximum
             setTimeout(() => {
                 hideLoader();
-            }, 3000);
-        });
+            }, 5000);
+        })();
     </script>
 {% endblock %}

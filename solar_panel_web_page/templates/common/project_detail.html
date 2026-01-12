@@ -8,6 +8,19 @@
 {% endblock %}
 
 {% block content %}
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loader-container">
+            <div class="solar-loader">
+                <div class="sun"></div>
+                <div class="ray ray1"></div>
+                <div class="ray ray2"></div>
+                <div class="ray ray3"></div>
+                <div class="ray ray4"></div>
+            </div>
+            <p class="loading-text">Зареждане на проект...</p>
+        </div>
+    </div>
 
     <div class="container my-5" id="content-card">
         <div>
@@ -33,6 +46,72 @@
 
     {% include 'common/bottom-view.html' %}
     <script>
+// Loading screen logic - runs immediately
+(function() {
+    const loadingScreen = document.getElementById('loading-screen');
+    
+    // Function to hide loading screen
+    function hideLoader() {
+        if (loadingScreen) {
+            loadingScreen.style.opacity = '0';
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+            }, 500);
+        }
+    }
+
+    // Function to check all images
+    function checkImages() {
+        const images = document.querySelectorAll('#content-card img');
+        const totalImages = images.length;
+        
+        if (totalImages === 0) {
+            hideLoader();
+            return;
+        }
+
+        let loadedImages = 0;
+
+        // Track image loading
+        images.forEach(img => {
+            if (img.complete && img.naturalHeight !== 0) {
+                loadedImages++;
+            } else {
+                img.addEventListener('load', () => {
+                    loadedImages++;
+                    if (loadedImages === totalImages) {
+                        hideLoader();
+                    }
+                });
+                img.addEventListener('error', () => {
+                    loadedImages++;
+                    if (loadedImages === totalImages) {
+                        hideLoader();
+                    }
+                });
+            }
+        });
+
+        // If all images already loaded
+        if (loadedImages === totalImages) {
+            hideLoader();
+        }
+    }
+
+    // Run when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', checkImages);
+    } else {
+        checkImages();
+    }
+
+    // Fallback: hide after 5 seconds maximum
+    setTimeout(() => {
+        hideLoader();
+    }, 5000);
+})();
+
+// Lightbox functionality
 document.addEventListener("DOMContentLoaded", function () {
     const overlay = document.getElementById("lightbox-overlay");
     const overlayImg = document.getElementById("lightbox-image");
