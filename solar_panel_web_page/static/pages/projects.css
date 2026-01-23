@@ -142,72 +142,6 @@ body > div.container.my-5 > div.pagination-container.text-center.mt-4 > nav > ul
     }
 }
 
-/* Progress bar styles */
-.loading-progress {
-    width: 200px;
-    height: 6px;
-    background: rgba(255, 215, 0, 0.2);
-    border-radius: 10px;
-    margin: 20px auto 10px;
-    overflow: hidden;
-}
-
-.progress-bar {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, #FFD700, #FFA500);
-    border-radius: 10px;
-    transition: width 0.3s ease-out;
-    box-shadow: 0 0 10px #FFD700;
-}
-
-.loading-percentage {
-    color: #FFD700;
-    font-size: 0.9rem;
-    font-family: "Open Sans", sans-serif;
-    margin-top: 5px;
-}
-
-/* Image wrapper and skeleton loader */
-.image-wrapper {
-    position: relative;
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
-}
-
-.image-skeleton {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        rgba(255, 255, 255, 0.05) 0%,
-        rgba(255, 255, 255, 0.15) 50%,
-        rgba(255, 255, 255, 0.05) 100%
-    );
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-    z-index: 1;
-}
-
-@keyframes shimmer {
-    0% {
-        background-position: -200% 0;
-    }
-    100% {
-        background-position: 200% 0;
-    }
-}
-
-.lazy-image {
-    position: relative;
-    z-index: 2;
-    transition: opacity 0.5s ease-in;
-}
-
 /* Card hover effect */
 .project-card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -216,4 +150,9 @@ body > div.container.my-5 > div.pagination-container.text-center.mt-4 > nav > ul
 .project-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 0 30px rgba(255, 215, 0, 0.3) !important;
+}
+
+/* Smooth page reveal */
+.page-content {
+    transition: opacity 0.6s ease-in;
 }

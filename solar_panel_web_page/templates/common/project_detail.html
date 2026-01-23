@@ -18,38 +18,22 @@
                 <div class="ray ray3"></div>
                 <div class="ray ray4"></div>
             </div>
-            <p class="loading-text">Зареждане на проект...</p>
-            <div class="loading-progress">
-                <div class="progress-bar" id="progress-bar"></div>
-            </div>
-            <p class="loading-percentage" id="loading-percentage">0%</p>
+            <p class="loading-text">Зареждане...</p>
         </div>
     </div>
 
-    <div class="container my-5" id="content-card">
+    <div class="container my-5 page-content" id="content-card" style="opacity: 0;">
         <div>
             <h1 class="display-4">{{ project.title }}</h1>
-            <div class="image-wrapper-detail">
-                <div class="image-skeleton-detail"></div>
-                <img 
-                    data-src="{{ project.image_url }}" 
-                    alt="project-img" 
-                    class="project-detail-image lazy-image-detail"
-                    loading="lazy"
-                    decoding="async"
-                    style="opacity: 0;">
-            </div>
+            <img 
+                src="{{ project.image_url }}" 
+                alt="project-img" 
+                class="project-detail-image">
             {% if project.secondary_image_url %}
-                <div class="image-wrapper-detail">
-                    <div class="image-skeleton-detail"></div>
-                    <img 
-                        data-src="{{ project.secondary_image_url }}" 
-                        alt="project-img" 
-                        class="project-detail-image lazy-image-detail"
-                        loading="lazy"
-                        decoding="async"
-                        style="opacity: 0;">
-                </div>
+                <img 
+                    src="{{ project.secondary_image_url }}" 
+                    alt="project-img" 
+                    class="project-detail-image">
             {% endif %}
             <p>{{ project.description|linebreaksbr }}</p>
             {% if project.post_url %}
@@ -68,112 +52,61 @@
 
     {% include 'common/bottom-view.html' %}
     <script>
-// Enhanced loading screen with progress tracking
+// Simple full-page loading overlay
 (function() {
     const loadingScreen = document.getElementById('loading-screen');
-    const progressBar = document.getElementById('progress-bar');
-    const loadingPercentage = document.getElementById('loading-percentage');
+    const pageContent = document.querySelector('.page-content');
     
-    let totalImages = 0;
-    let loadedImages = 0;
-    
-    // Function to update progress
-    function updateProgress() {
-        const percentage = totalImages > 0 ? Math.round((loadedImages / totalImages) * 100) : 0;
-        if (progressBar) {
-            progressBar.style.width = percentage + '%';
-        }
-        if (loadingPercentage) {
-            loadingPercentage.textContent = percentage + '%';
-        }
-    }
-    
-    // Function to hide loading screen
-    function hideLoader() {
-        if (loadingScreen) {
-            updateProgress(); // Final update to 100%
+    // Function to show content and hide loader
+    function showPage() {
+        if (loadingScreen && pageContent) {
+            // Fade out loading screen
+            loadingScreen.style.opacity = '0';
+            
             setTimeout(() => {
-                loadingScreen.style.opacity = '0';
-                setTimeout(() => {
-                    loadingScreen.style.display = 'none';
-                }, 500);
-            }, 300);
+                loadingScreen.style.display = 'none';
+                // Fade in page content
+                pageContent.style.transition = 'opacity 0.6s ease-in';
+                pageContent.style.opacity = '1';
+            }, 500);
         }
     }
-
-    // Lazy loading implementation
-    function lazyLoadImages() {
-        const lazyImages = document.querySelectorAll('.lazy-image-detail');
-        totalImages = lazyImages.length;
+    
+    // Wait for images to load
+    function waitForImages() {
+        const images = document.querySelectorAll('.project-detail-image');
+        const imagePromises = [];
         
-        if (totalImages === 0) {
-            hideLoader();
-            return;
-        }
+        images.forEach(img => {
+            if (img.complete) {
+                return;
+            }
+            
+            const promise = new Promise((resolve) => {
+                img.onload = resolve;
+                img.onerror = resolve;
+            });
+            
+            imagePromises.push(promise);
+        });
         
-        updateProgress();
-
-        // Function to load a single image
-        function loadImage(img) {
-            return new Promise((resolve, reject) => {
-                const imageWrapper = img.closest('.image-wrapper-detail');
-                const skeleton = imageWrapper?.querySelector('.image-skeleton-detail');
-                
-                const actualImg = new Image();
-                actualImg.onload = () => {
-                    img.src = actualImg.src;
-                    img.style.opacity = '1';
-                    img.style.transition = 'opacity 0.6s ease-in';
-                    
-                    // Hide skeleton
-                    if (skeleton) {
-                        skeleton.style.opacity = '0';
-                        setTimeout(() => {
-                            skeleton.style.display = 'none';
-                        }, 600);
-                    }
-                    
-                    loadedImages++;
-                    updateProgress();
-                    resolve();
-                };
-                
-                actualImg.onerror = () => {
-                    // Even on error, hide skeleton and mark as loaded
-                    img.style.opacity = '0.3';
-                    if (skeleton) {
-                        skeleton.style.display = 'none';
-                    }
-                    loadedImages++;
-                    updateProgress();
-                    resolve();
-                };
-                
-                actualImg.src = img.dataset.src;
-            });
-        }
-
-        // Load all images
-        Promise.all(Array.from(lazyImages).map(loadImage))
-            .then(() => {
-                hideLoader();
-            })
-            .catch(() => {
-                hideLoader();
-            });
+        // Show page when all images loaded or after minimum time
+        const minLoadTime = new Promise(resolve => setTimeout(resolve, 1000));
+        
+        Promise.all([...imagePromises, minLoadTime])
+            .then(showPage)
+            .catch(showPage);
     }
-
-    // Run when DOM is ready
+    
+    // Start when DOM is ready
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', lazyLoadImages);
+        document.addEventListener('DOMContentLoaded', waitForImages);
     } else {
-        lazyLoadImages();
+        waitForImages();
     }
-
-    // Fallback: hide after 10 seconds maximum
-    setTimeout(() => {
-        hideLoader();
-    }, 10000);
+    
+    // Failsafe: show page after 5 seconds no matter what
+    setTimeout(showPage, 5000);
 })();
 
 // Lightbox functionality
