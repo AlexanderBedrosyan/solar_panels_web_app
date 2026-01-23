@@ -8,23 +8,28 @@
 {% endblock %}
 
 {% block content %}
-    <!-- Loading Screen -->
-    <div id="loading-screen">
-        <div class="loader-container">
-            <div class="modern-loader">
-                <div class="loader-circle"></div>
-                <div class="loader-circle"></div>
-                <div class="loader-circle"></div>
-            </div>
-            <h2 class="loading-title">Зареждане на проект</h2>
-            <p class="loading-subtitle">Моля изчакайте...</p>
-            <div class="loading-dots">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+    <!-- Modern Loading Screen -->
+    <div id="loading-screen" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); display: flex; justify-content: center; align-items: center; z-index: 999999; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+        <div style="text-align: center;">
+            <!-- Spinning Circle Loader -->
+            <div class="spinner-loader" style="width: 80px; height: 80px; margin: 0 auto 30px; border: 6px solid rgba(255, 215, 0, 0.1); border-top: 6px solid #FFD700; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+            
+            <!-- Loading Text -->
+            <h1 style="color: #FFD700; font-size: 2rem; font-weight: 600; margin: 0 0 12px 0; letter-spacing: 1px;">ЗАРЕЖДАНЕ</h1>
+            <p style="color: #FFA500; font-size: 1.1rem; font-weight: 300; margin: 0; opacity: 0.9;">Моля изчакайте...</p>
         </div>
     </div>
+    
+    <style>
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        #loading-screen {
+            transition: opacity 0.5s ease-out;
+        }
+    </style>
 
     <div class="container my-5 page-content" id="content-card" style="opacity: 0;">
         <div>
