@@ -19,6 +19,10 @@
                 <div class="ray ray4"></div>
             </div>
             <p class="loading-text">Зареждане на проекти...</p>
+            <div class="loading-progress">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <p class="loading-percentage" id="loading-percentage">0%</p>
         </div>
     </div>
     
@@ -28,8 +32,19 @@
         {% if object_list %}
             {% for project in object_list %}
             <div class="col-md-4 mb-4">
-                <div class="card shadow-sm" id="content-card" style="box-shadow: 0 0 20px rgba(0, 0, 0, 0.8) !important;">
-                    <img src="{{ project.image_url }}" alt="{{ project.title }}" class="card-img-top" style="height: 200px; object-fit: cover;">
+                <div class="card shadow-sm project-card" id="content-card" style="box-shadow: 0 0 20px rgba(0, 0, 0, 0.8) !important;">
+                    <div class="image-wrapper">
+                        <!-- Skeleton loader -->
+                        <div class="image-skeleton"></div>
+                        <!-- Actual image with lazy loading -->
+                        <img 
+                            data-src="{{ project.image_url }}" 
+                            alt="{{ project.title }}" 
+                            class="card-img-top lazy-image" 
+                            style="height: 200px; object-fit: cover; opacity: 0;"
+                            loading="lazy"
+                            decoding="async">
+                    </div>
                     <div class="card-body">
                         <h5 class="card-title">{{ project.title }}</h5>
                         <p class="card-text">{{ project.description|truncatewords:4 }}</p>
@@ -69,70 +84,112 @@
     {% include 'common/bottom-view.html' %}
 
     <script>
-        // Loading screen logic - runs immediately
+        // Enhanced loading screen with progress tracking
         (function() {
             const loadingScreen = document.getElementById('loading-screen');
+            const progressBar = document.getElementById('progress-bar');
+            const loadingPercentage = document.getElementById('loading-percentage');
+            
+            let totalImages = 0;
+            let loadedImages = 0;
+            
+            // Function to update progress
+            function updateProgress() {
+                const percentage = totalImages > 0 ? Math.round((loadedImages / totalImages) * 100) : 0;
+                if (progressBar) {
+                    progressBar.style.width = percentage + '%';
+                }
+                if (loadingPercentage) {
+                    loadingPercentage.textContent = percentage + '%';
+                }
+            }
             
             // Function to hide loading screen
             function hideLoader() {
-                console.log('Testing reload...')
                 if (loadingScreen) {
-                    loadingScreen.style.opacity = '0';
+                    updateProgress(); // Final update to 100%
                     setTimeout(() => {
-                        loadingScreen.style.display = 'none';
-                    }, 500);
+                        loadingScreen.style.opacity = '0';
+                        setTimeout(() => {
+                            loadingScreen.style.display = 'none';
+                        }, 500);
+                    }, 300);
                 }
             }
 
-            // Function to check all images
-            function checkImages() {
-                const images = document.querySelectorAll('.card-img-top');
-                const totalImages = images.length;
+            // Lazy loading implementation
+            function lazyLoadImages() {
+                const lazyImages = document.querySelectorAll('.lazy-image');
+                totalImages = lazyImages.length;
                 
                 if (totalImages === 0) {
                     hideLoader();
                     return;
                 }
+                
+                updateProgress();
 
-                let loadedImages = 0;
-
-                // Track image loading
-                images.forEach(img => {
-                    if (img.complete && img.naturalHeight !== 0) {
-                        loadedImages++;
-                    } else {
-                        img.addEventListener('load', () => {
-                            loadedImages++;
-                            if (loadedImages === totalImages) {
-                                hideLoader();
+                // Function to load a single image
+                function loadImage(img) {
+                    return new Promise((resolve, reject) => {
+                        const imageWrapper = img.closest('.image-wrapper');
+                        const skeleton = imageWrapper?.querySelector('.image-skeleton');
+                        
+                        const actualImg = new Image();
+                        actualImg.onload = () => {
+                            img.src = actualImg.src;
+                            img.style.opacity = '1';
+                            img.style.transition = 'opacity 0.5s ease-in';
+                            
+                            // Hide skeleton
+                            if (skeleton) {
+                                skeleton.style.opacity = '0';
+                                setTimeout(() => {
+                                    skeleton.style.display = 'none';
+                                }, 500);
                             }
-                        });
-                        img.addEventListener('error', () => {
+                            
                             loadedImages++;
-                            if (loadedImages === totalImages) {
-                                hideLoader();
+                            updateProgress();
+                            resolve();
+                        };
+                        
+                        actualImg.onerror = () => {
+                            // Even on error, hide skeleton and mark as loaded
+                            img.style.opacity = '0.3';
+                            if (skeleton) {
+                                skeleton.style.display = 'none';
                             }
-                        });
-                    }
-                });
-
-                // If all images already loaded
-                if (loadedImages === totalImages) {
-                    hideLoader();
+                            loadedImages++;
+                            updateProgress();
+                            resolve(); // Still resolve to not block other images
+                        };
+                        
+                        actualImg.src = img.dataset.src;
+                    });
                 }
+
+                // Load all images
+                Promise.all(Array.from(lazyImages).map(loadImage))
+                    .then(() => {
+                        hideLoader();
+                    })
+                    .catch(() => {
+                        hideLoader();
+                    });
             }
 
             // Run when DOM is ready
             if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', checkImages);
+                document.addEventListener('DOMContentLoaded', lazyLoadImages);
             } else {
-                checkImages();
+                lazyLoadImages();
             }
 
-            // Fallback: hide after 5 seconds maximum
+            // Fallback: hide after 10 seconds maximum
             setTimeout(() => {
                 hideLoader();
-            }, 5000);
+            }, 10000);
         })();
     </script>
 {% endblock %}
